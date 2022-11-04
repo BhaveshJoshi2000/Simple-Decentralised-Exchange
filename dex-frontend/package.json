@@ -1,0 +1,33 @@
+{
+  "name": "nextjs-smartcontract-lottery-fcc",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "moralis:sync": "moralis-admin-cli connect-local-devchain --chain hardhat --moralisSubdomain 35p5vyb1ftpg.grandmoralis.com --frpcPath ./frp/frpc",
+    "moralis:cloud": "moralis-admin-cli watch-cloud-folder --moralisSubdomain 35p5vyb1ftpg.grandmoralis.com --autoSave 1 --moralisCloudfolder ./cloudFunctions"
+  },
+  "dependencies": {
+    "@web3uikit/core": "^0.1.10",
+    "@web3uikit/icons": "^0.1.5",
+    "@web3uikit/web3": "^0.1.9",
+    "moralis-admin-cli": "^2.1.16",
+    "moralis-v1": "^1.11.0",
+    "next": "12.1.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-moralis": "^1.4.2",
+    "web3uikit": "^0.1.159"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.12",
+    "dotenv": "^16.0.3",
+    "eslint": "8.13.0",
+    "eslint-config-next": "12.1.5",
+    "postcss": "^8.4.17",
+    "tailwindcss": "^3.1.8"
+  }
+}
