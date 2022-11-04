@@ -72,7 +72,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <div>
+      <div className="flex justify-evenly items-center">
         <Liquidator
           reserve1={reserve1}
           reserve2={reserve2}
@@ -80,7 +80,6 @@ export default function Home() {
           dexAddress={dexAddress}
           token1Address={token1Address}
           token2Address={token2Address}
-          className="w-96"
         />
         <Swapper
           dexAddress={dexAddress}

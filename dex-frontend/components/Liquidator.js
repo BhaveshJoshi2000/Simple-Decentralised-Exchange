@@ -128,63 +128,83 @@ export default function Liquidator(props) {
 
   return (
     <div>
-      <p>
-        Total Supply of Token-1 is {props.reserve1} address is{" "}
-        {props.token1Address}
-      </p>
-      <p>
-        Total Supply of Token-2 is {props.reserve2} address is{" "}
-        {props.token1Address}
-      </p>
-      <p>Total tokens locked in contract is {props.totalSupply}</p>
-
-      <div className={styles.container}>
-        <Form
-          buttonConfig={{
-            onClick: function noRefCheck() {},
-            theme: "primary",
-            text: "Add Liquidity",
-          }}
-          onSubmit={approveAndAdd}
-          data={[
-            {
-              name: "Token 1 Amount",
-              type: "number",
-              value: "",
-              key: "token1",
-            },
-            {
-              name: "Token 2 Amount",
-              type: "number",
-              value: "",
-              key: "token2",
-            },
-          ]}
-          title="ADD LIQUIDITY AND GET SHARES"
-          id="Main Form"
-        />
+      <div className="w-100 m-10 p-4">
+        <p>
+          Total Supply of Token-1 is{" "}
+          <span className="text-lg font-bold text-red-600">
+            {props.reserve1}
+          </span>{" "}
+          address is
+          <span className="text-lg font-bold text-blue-600 m-2 select-all">
+            {props.token1Address}
+          </span>
+        </p>
+        <p>
+          Total Supply of Token-2 is{" "}
+          <span className="text-lg font-bold text-red-600">
+            {props.reserve2}
+          </span>{" "}
+          address is
+          <span className="text-lg font-bold text-blue-600 m-2 select-all">
+            {props.token2Address}
+          </span>
+        </p>
+        <p>
+          Total tokens locked in contract is{" "}
+          <span className="text-lg font-bold text-red-600 ">
+            {props.totalSupply}
+          </span>
+        </p>
       </div>
+      <div className="flex justify-center items-center ">
+        <div className={styles.container}>
+          <Form
+            buttonConfig={{
+              onClick: function noRefCheck() {},
+              theme: "primary",
+              text: "Add Liquidity",
+            }}
+            onSubmit={approveAndAdd}
+            data={[
+              {
+                name: "Token 1 Amount",
+                type: "number",
+                value: "",
+                key: "token1",
+              },
+              {
+                name: "Token 2 Amount",
+                type: "number",
+                value: "",
+                key: "token2",
+              },
+            ]}
+            title="ADD LIQUIDITY AND GET SHARES"
+            id="Main Form"
+          />
+        </div>
 
-      <div className={styles.container}>
-        <Form
-          buttonConfig={{
-            onClick: function noRefCheck() {},
-            theme: "colored",
-            color: "red",
-            text: "Remove Liquidity",
-          }}
-          onSubmit={Remove}
-          data={[
-            {
-              name: "shares you want to liquidate",
-              type: "number",
-              value: "",
-              key: "token2",
-            },
-          ]}
-          title="Remove Liquidity"
-          id="Main Form"
-        />
+        <div className={styles.container}>
+          <Form
+            buttonConfig={{
+              onClick: function noRefCheck() {},
+              theme: "colored",
+              color: "red",
+              text: "Remove Liquidity",
+            }}
+            onSubmit={Remove}
+            data={[
+              {
+                name: "shares you want to liquidate",
+                type: "number",
+                value: "",
+                key: "token2",
+              },
+            ]}
+            title="Remove Liquidity"
+            id="Main Form"
+          />
+        </div>
       </div>
     </div>
   );
