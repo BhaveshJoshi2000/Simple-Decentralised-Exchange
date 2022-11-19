@@ -5,8 +5,9 @@ import dexAbi from "../constants/DEX.json";
 import token1Abi from "../constants/Token.json";
 import token2Abi from "../constants/Token2.json";
 import networkMapping from "../constants/networkMapping.json";
-import { Form, useNotification } from "web3uikit";
+import { Form, useNotification, Button } from "web3uikit";
 import { ethers } from "ethers";
+
 export default function Liquidator(props) {
   const { chainId: chainIdHex, isWeb3Enabled } = useMoralis();
   const chainId = parseInt(chainIdHex);
@@ -126,11 +127,52 @@ export default function Liquidator(props) {
     });
   }
 
+  async function mint1() {
+    console.log("mint1()");
+    const amount = ethers.utils.parseUnits("500", "ether").toString();
+    const mint1Options = {
+      abi: token1Abi,
+      contractAddress: token1Address,
+      functionName: "mint",
+      params: {
+        _amount: amount,
+      },
+    };
+
+    await runContractFunction({
+      params: mint1Options,
+      onSuccess: () => console.log("Minting Token1 Success"),
+      onError: (error) => {
+        console.log(error);
+      },
+    });
+  }
+  async function mint2() {
+    console.log("mint2()");
+    const amount = ethers.utils.parseUnits("500", "ether").toString();
+    const mint2Options = {
+      abi: token2Abi,
+      contractAddress: token2Address,
+      functionName: "mint",
+      params: {
+        _amount: amount,
+      },
+    };
+
+    await runContractFunction({
+      params: mint2Options,
+      onSuccess: () => console.log("Minting Token1 Success"),
+      onError: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
   return (
     <div>
       <div className="w-100 m-10 p-4">
         <p>
-          Total Supply of Token-1 is{" "}
+          Total Supply of MTK token is{" "}
           <span className="text-lg font-bold text-red-600">
             {props.reserve1}
           </span>{" "}
@@ -138,9 +180,12 @@ export default function Liquidator(props) {
           <span className="text-lg font-bold text-blue-600 m-2 select-all">
             {props.token1Address}
           </span>
+          <Button onClick={mint1} text="Mint 500 to test" />
         </p>
+        <br />
+        <br />
         <p>
-          Total Supply of Token-2 is{" "}
+          Total Supply of MTK-2 token is{" "}
           <span className="text-lg font-bold text-red-600">
             {props.reserve2}
           </span>{" "}
@@ -148,62 +193,66 @@ export default function Liquidator(props) {
           <span className="text-lg font-bold text-blue-600 m-2 select-all">
             {props.token2Address}
           </span>
+          <Button onClick={mint2} text="Mint 500 to test" />
         </p>
         <p>
-          Total tokens locked in contract is{" "}
+          Total shares in contract is{" "}
           <span className="text-lg font-bold text-red-600 ">
             {props.totalSupply}
           </span>
         </p>
+        <br />
       </div>
-      <div className="flex justify-center items-center ">
-        <div className={styles.container}>
-          <Form
-            buttonConfig={{
-              onClick: function noRefCheck() {},
-              theme: "primary",
-              text: "Add Liquidity",
-            }}
-            onSubmit={approveAndAdd}
-            data={[
-              {
-                name: "Token 1 Amount",
-                type: "number",
-                value: "",
-                key: "token1",
-              },
-              {
-                name: "Token 2 Amount",
-                type: "number",
-                value: "",
-                key: "token2",
-              },
-            ]}
-            title="ADD LIQUIDITY AND GET SHARES"
-            id="Main Form"
-          />
-        </div>
+      <div>
+        <div className="flex justify-between p-8 ">
+          <div className={styles.card}>
+            <Form
+              buttonConfig={{
+                onClick: function noRefCheck() {},
+                theme: "primary",
+                text: "Add Liquidity",
+              }}
+              onSubmit={approveAndAdd}
+              data={[
+                {
+                  name: "Token 1 Amount",
+                  type: "number",
+                  value: "",
+                  key: "token1",
+                },
+                {
+                  name: "Token 2 Amount",
+                  type: "number",
+                  value: "",
+                  key: "token2",
+                },
+              ]}
+              title="ADD LIQUIDITY AND GET SHARES"
+              id="Main Form"
+            />
+          </div>
 
-        <div className={styles.container}>
-          <Form
-            buttonConfig={{
-              onClick: function noRefCheck() {},
-              theme: "colored",
-              color: "red",
-              text: "Remove Liquidity",
-            }}
-            onSubmit={Remove}
-            data={[
-              {
-                name: "shares you want to liquidate",
-                type: "number",
-                value: "",
-                key: "token2",
-              },
-            ]}
-            title="Remove Liquidity"
-            id="Main Form"
-          />
+          <div className={styles.card}>
+            <Form
+              buttonConfig={{
+                onClick: function noRefCheck() {},
+                theme: "colored",
+                color: "red",
+                text: "Remove Liquidity",
+              }}
+              onSubmit={Remove}
+              data={[
+                {
+                  name: "shares you want to liquidate",
+                  type: "number",
+                  value: "",
+                  key: "token2",
+                },
+              ]}
+              title="Remove Liquidity"
+              id="Main Form"
+            />
+          </div>
         </div>
       </div>
     </div>

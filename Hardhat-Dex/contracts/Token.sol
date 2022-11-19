@@ -7,4 +7,8 @@ contract Token is ERC20 {
     constructor(uint256 amount) ERC20("MyToken", "MTK") {
         _mint(msg.sender, amount);
     }
+
+    function mint(uint256 _amount) public {
+        _mint(msg.sender, _amount);
+    }
 }

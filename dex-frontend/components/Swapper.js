@@ -82,8 +82,14 @@ export default function Swapper(props) {
     });
   }
   return (
-    <div className={styles.container}>
+    <div className={styles.card}>
       <Form
+        buttonConfig={{
+          onClick: function noRefCheck() {},
+          theme: "colored",
+          color: "blue",
+          text: "SWAP!!",
+        }}
         onSubmit={approveAndSwap}
         data={[
           {

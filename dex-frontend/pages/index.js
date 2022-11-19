@@ -72,21 +72,25 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <div className="flex justify-evenly items-center">
-        <Liquidator
-          reserve1={reserve1}
-          reserve2={reserve2}
-          totalSupply={totalSupply}
-          dexAddress={dexAddress}
-          token1Address={token1Address}
-          token2Address={token2Address}
-        />
-        <Swapper
-          dexAddress={dexAddress}
-          token1Address={token1Address}
-          token2Address={token2Address}
-        />
-      </div>
+      {dexAddress ? (
+        <div className="flex flex-col items-center">
+          <Liquidator
+            reserve1={reserve1}
+            reserve2={reserve2}
+            totalSupply={totalSupply}
+            dexAddress={dexAddress}
+            token1Address={token1Address}
+            token2Address={token2Address}
+          />
+          <Swapper
+            dexAddress={dexAddress}
+            token1Address={token1Address}
+            token2Address={token2Address}
+          />
+        </div>
+      ) : (
+        <div> Connect to Goreli Testnet!</div>
+      )}
     </div>
   );
 }
